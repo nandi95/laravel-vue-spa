@@ -29,7 +29,11 @@
             <transition name="fade">
               <div
                 v-if="menuOpen"
-                v-click-outside="()=>{ menuOpen = false }"
+                v-click-outside="
+                  () => {
+                    menuOpen = false;
+                  }
+                "
                 class="flex-around dropdown absolute"
               >
                 <router-link

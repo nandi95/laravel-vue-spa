@@ -5,9 +5,7 @@
 
       <!-- Name -->
       <div class="flex-between mb-3">
-        <label for="name">{{
-          $t("name")
-        }}</label>
+        <label for="name">{{ $t("name") }}</label>
         <div class="col-md-7">
           <input
             v-model="form.name"
@@ -23,9 +21,7 @@
 
       <!-- Email -->
       <div class="flex-between mb-3">
-        <label for="email">{{
-          $t("email")
-        }}</label>
+        <label for="email">{{ $t("email") }}</label>
         <div class="col-md-7">
           <input
             v-model="form.email"
@@ -41,9 +37,9 @@
 
       <!-- Submit Button -->
       <div class="flex-center">
-          <v-button :loading="form.busy" type="success">
-            {{ $t("update") }}
-          </v-button>
+        <v-button :loading="form.busy" type="success">
+          {{ $t("update") }}
+        </v-button>
       </div>
     </form>
   </card>
