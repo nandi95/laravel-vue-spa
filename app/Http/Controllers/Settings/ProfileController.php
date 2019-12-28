@@ -2,26 +2,28 @@
 
 namespace App\Http\Controllers\Settings;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\ProfileRequest;
+use App\Http\Resources\UserResource;
 use App\Http\Controllers\Controller;
 
+/**
+ * Class ProfileController
+ *
+ * @package App\Http\Controllers\Settings
+ */
 class ProfileController extends Controller
 {
     /**
      * Update the user's profile information.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param ProfileRequest $request
+     *
+     * @return UserResource
      */
-    public function update(Request $request)
+    public function update(ProfileRequest $request)
     {
-        $user = $request->user();
+        $user = tap($request->user())->update($request->validated());
 
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$user->id,
-        ]);
-
-        return tap($user)->update($request->only('name', 'email'));
+        return new UserResource($user);
     }
 }

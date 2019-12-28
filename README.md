@@ -4,6 +4,7 @@
 <a href="https://packagist.org/packages/cretueusebiu/laravel-vue-spa"><img src="https://poser.pugx.org/cretueusebiu/laravel-vue-spa/d/total.svg" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/cretueusebiu/laravel-vue-spa"><img src="https://poser.pugx.org/cretueusebiu/laravel-vue-spa/v/stable.svg" alt="Latest Stable Version"></a>
 
+Fork differences can be found at the bottom of the document
 > A Laravel-Vue SPA starter project template.
 
 <p align="center">
@@ -63,3 +64,37 @@ To enable email verification make sure that your `App\User` model implements the
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+
+## Fork differences
+
+This is not an exhaustive list of changes
+Only the major notable changes.
+
+**FRONTEND**
+ - Removed bootstrap
+ - Removed popper.js
+ - Removed jQuery
+ - Removed fontawesome
+ - Removed SweetAlert2
+ - Added layout helpers
+ - Added base styles
+ - Updated error component
+ - Added tailwindcss
+ - Added material design icons
+ - Added vue toastify
+ - Updated styling throughout
+
+***
+
+**BACKEND**
+- Added LaravelEnum package and 2 general enum list
+- Added testing utilities
+- Added transform keys middleware and its tests
+- Added collection macros
+- Added helpful traits
+- Added install script
+- Updated User model to include first and last name
+- Moved models into Models/ directory
+- Added StrongPassword rule
+- Added base model
+

@@ -21,6 +21,7 @@ class CreateOauthProvidersTable extends Migration
             $table->string('access_token')->nullable();
             $table->string('refresh_token')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')
                 ->references('id')

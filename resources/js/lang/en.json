@@ -15,7 +15,8 @@
   "password": "Password",
   "forgot_password": "Forgot Your Password?",
   "confirm_password": "Confirm Password",
-  "name": "Name",
+  "first_name": "First Name",
+  "last_name": "Last Name",
   "toggle_navigation": "Toggle navigation",
   "home": "Home",
   "you_are_logged_in": "You are logged in!",
@@ -35,5 +36,5 @@
   "send_verification_link": "Send Verification Link",
   "resend_verification_link": "Resend Verification Link ?",
   "failed_to_verify_email": "Failed to verify email.",
-  "verify_email_address": "We sent you an email with an the verification link."
+  "verify_email_address": "We sent you an email with the verification link."
 }

@@ -2,6 +2,11 @@
 
 namespace Tests\Browser\Pages;
 
+/**
+ * Class Login
+ *
+ * @package Tests\Browser\Pages
+ */
 class Login extends Page
 {
     /**
@@ -11,15 +16,16 @@ class Login extends Page
      */
     public function url()
     {
-        return '/login';
+        return route('api.guest.auth.login');
     }
 
     /**
      * Submit the form with the given credentials.
      *
-     * @param  \Laravel\Dusk\Browser $browser
-     * @param  string $email
-     * @param  string $password
+     * @param \Laravel\Dusk\Browser $browser
+     * @param string                $email
+     * @param string                $password
+     *
      * @return void
      */
     public function submit($browser, $email, $password)

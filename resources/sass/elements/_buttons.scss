@@ -1,3 +1,21 @@
+.btn {
+  @apply px-4 py-2 border rounded transition-all;
+  &:hover {
+    @apply transition-all;
+  }
+}
+.btn-dark {
+  @apply bg-gray-700 text-white transition-all;
+  &:hover {
+    @apply bg-gray-900 transition-all;
+  }
+}
+.btn-primary {
+  @apply bg-blue-500 text-white transition-all;
+  &:hover {
+    @apply bg-blue-700 transition-all;
+  }
+}
 .btn-loading {
   position: relative;
   pointer-events: none;

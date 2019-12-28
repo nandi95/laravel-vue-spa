@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\User;
+use App\Models\User;
 use Tests\TestCase;
 use App\Notifications\VerifyEmail;
 use Illuminate\Support\Facades\URL;
@@ -10,13 +10,22 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 
+/**
+ * Class VerificationTest
+ *
+ * @package Tests\Feature
+ */
 class VerificationTest extends TestCase
 {
-    /** @test */
+    /**
+     * @test
+     *
+     * @return void
+     */
     public function can_verify_email()
     {
         $user = factory(User::class)->create(['email_verified_at' => null]);
-        $url = URL::temporarySignedRoute('verification.verify', now()->addMinutes(60), ['user' => $user->id]);
+        $url  = URL::temporarySignedRoute('api.guest.verification.verify', now()->addMinutes(60), ['user' => $user->id]);
 
         Event::fake();
 
@@ -29,18 +38,26 @@ class VerificationTest extends TestCase
         });
     }
 
-    /** @test */
+    /**
+     * @test
+     *
+     * @return void
+     */
     public function can_not_verify_if_already_verified()
     {
         $user = factory(User::class)->create();
-        $url = URL::temporarySignedRoute('verification.verify', now()->addMinutes(60), ['user' => $user->id]);
+        $url  = URL::temporarySignedRoute('api.guest.verification.verify', now()->addMinutes(60), ['user' => $user->id]);
 
         $this->postJson($url)
             ->assertStatus(400)
             ->assertJsonFragment(['status' => 'The email is already verified.']);
     }
 
-    /** @test */
+    /**
+     * @test
+     *
+     * @return void
+     */
     public function can_not_verify_if_url_has_invalid_signature()
     {
         $user = factory(User::class)->create(['email_verified_at' => null]);
@@ -50,7 +67,11 @@ class VerificationTest extends TestCase
             ->assertJsonFragment(['status' => 'The verification link is invalid.']);
     }
 
-    /** @test */
+    /**
+     * @test
+     *
+     * @return void
+     */
     public function resend_verification_notification()
     {
         $user = factory(User::class)->create(['email_verified_at' => null]);
@@ -63,7 +84,11 @@ class VerificationTest extends TestCase
         Notification::assertSentTo($user, VerifyEmail::class);
     }
 
-    /** @test */
+    /**
+     * @test
+     *
+     * @return void
+     */
     public function can_not_resend_verification_notification_if_email_does_not_exist()
     {
         $this->postJson('/api/email/resend', ['email' => 'foo@bar.com'])
@@ -71,7 +96,11 @@ class VerificationTest extends TestCase
             ->assertJsonFragment(['errors' => ['email' => ['We can\'t find a user with that e-mail address.']]]);
     }
 
-    /** @test */
+    /**
+     * @test
+     *
+     * @return void
+     */
     public function can_not_resend_verification_notification_if_email_already_verified()
     {
         $user = factory(User::class)->create();

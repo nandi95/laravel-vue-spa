@@ -5,6 +5,11 @@ namespace Tests\Browser\Pages;
 use Laravel\Dusk\Browser;
 use Laravel\Dusk\Page as BasePage;
 
+/**
+ * Class Page
+ *
+ * @package Tests\Browser\Pages
+ */
 abstract class Page extends BasePage
 {
     /**

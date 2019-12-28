@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Rules\StrongPassword;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
+/**
+ * Class ResetPasswordController
+ *
+ * @package App\Http\Controllers\Auth
+ */
 class ResetPasswordController extends Controller
 {
     use ResetsPasswords;
@@ -21,10 +27,25 @@ class ResetPasswordController extends Controller
     }
 
     /**
+     * Get the password reset validation rules.
+     *
+     * @return array
+     */
+    protected function rules()
+    {
+        return [
+            'token'    => 'required',
+            'email'    => 'required|email',
+            'password' => ['required', 'confirmed', new StrongPassword],
+        ];
+    }
+
+    /**
      * Get the response for a successful password reset.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  string  $response
+     * @param Request $request
+     * @param string  $response
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     protected function sendResetResponse(Request $request, $response)
@@ -35,8 +56,8 @@ class ResetPasswordController extends Controller
     /**
      * Get the response for a failed password reset.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  string  $response
+     * @param Request $request
+     * @param string  $response
      * @return \Illuminate\Http\RedirectResponse
      */
     protected function sendResetFailedResponse(Request $request, $response)

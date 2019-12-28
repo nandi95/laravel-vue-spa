@@ -14,7 +14,7 @@ $config = [
 
   <title>{{ config('app.name') }}</title>
 
-  <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}">
+  <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
 <body>
   <div id="app"></div>
@@ -25,6 +25,8 @@ $config = [
   </script>
 
   {{-- Load the application scripts --}}
-  <script src="{{ mix('dist/js/app.js') }}"></script>
+{{--  <script src="{{ mix('js/manifest.js') }}"></script>--}}
+{{--  <script src="{{ mix('js/vendor.bundle.js') }}"></script>--}}
+  <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>

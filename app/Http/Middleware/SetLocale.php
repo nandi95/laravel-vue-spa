@@ -3,14 +3,21 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 
+/**
+ * Class SetLocale
+ *
+ * @package App\Http\Middleware
+ */
 class SetLocale
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param Request  $request
+     * @param \Closure $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -23,7 +30,7 @@ class SetLocale
     }
 
     /**
-     * @param  \Illuminate\Http\Request $request
+     * @param  Request $request
      * @return string|null
      */
     protected function parseLocale($request)

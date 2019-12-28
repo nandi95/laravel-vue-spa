@@ -1,0 +1,10 @@
+.input {
+  @apply transition-all px-2 py-1 border rounded;
+
+  &:active, &:focus {
+    @apply transition-all shadow-inner;
+  }
+  &:disabled {
+    @apply transition-all bg-gray-200 border-none;
+  }
+}

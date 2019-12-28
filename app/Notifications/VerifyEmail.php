@@ -6,6 +6,11 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Auth\Notifications\VerifyEmail as Notification;
 
+/**
+ * Class VerifyEmail
+ *
+ * @package App\Notifications
+ */
 class VerifyEmail extends Notification
 {
     /**
@@ -17,7 +22,7 @@ class VerifyEmail extends Notification
     protected function verificationUrl($notifiable)
     {
         $url = URL::temporarySignedRoute(
-            'verification.verify', Carbon::now()->addMinutes(60), ['user' => $notifiable->id]
+            'api.guest.verification.verify', Carbon::now()->addMinutes(60), ['user' => $notifiable->id]
         );
 
         return str_replace('/api', '', $url);

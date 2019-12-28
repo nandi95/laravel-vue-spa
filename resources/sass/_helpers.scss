@@ -1,0 +1,27 @@
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@responsive {
+  .flex-between {
+    @apply flex flex-row flex-wrap justify-between items-center content-center;
+  }
+
+  .flex-center {
+    @apply flex flex-row flex-wrap justify-center items-center content-center;
+  }
+
+  .flex-around {
+    @apply flex flex-row flex-wrap justify-around items-center content-center;
+  }
+
+  .flex-start {
+    @apply flex flex-row flex-wrap justify-start items-center content-center;
+  }
+
+  .flex-end {
+    @apply flex flex-row flex-wrap justify-end items-center content-center;
+  }
+}

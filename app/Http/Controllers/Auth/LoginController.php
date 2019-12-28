@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Exceptions\VerifyEmailException;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+/**
+ * Class LoginController
+ *
+ * @package App\Http\Controllers\Auth
+ */
 class LoginController extends Controller
 {
     use AuthenticatesUsers;
@@ -26,7 +33,8 @@ class LoginController extends Controller
     /**
      * Attempt to log the user into the application.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
+     *
      * @return bool
      */
     protected function attemptLogin(Request $request)
@@ -50,14 +58,15 @@ class LoginController extends Controller
     /**
      * Send the response after the user was authenticated.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param Request $request
+     *
+     * @return JsonResponse
      */
     protected function sendLoginResponse(Request $request)
     {
         $this->clearLoginAttempts($request);
 
-        $token = (string) $this->guard()->getToken();
+        $token      = (string) $this->guard()->getToken();
         $expiration = $this->guard()->getPayload()->get('exp');
 
         return response()->json([
@@ -70,10 +79,11 @@ class LoginController extends Controller
     /**
      * Get the failed login response instance.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param Request $request
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @return JsonResponse
+     *
+     * @throws ValidationException
      */
     protected function sendFailedLoginResponse(Request $request)
     {
@@ -90,8 +100,9 @@ class LoginController extends Controller
     /**
      * Log the user out of the application.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     *
+     * @return void
      */
     public function logout(Request $request)
     {

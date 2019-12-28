@@ -41,6 +41,7 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             'bindings',
+           \App\Core\Http\Middleware\ConvertJsonKeys::class
         ],
     ];
 

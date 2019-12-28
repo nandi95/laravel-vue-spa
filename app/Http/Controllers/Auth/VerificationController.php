@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Validation\ValidationException;
 
+/**
+ * Class VerificationController
+ *
+ * @package App\Http\Controllers\Auth
+ */
 class VerificationController extends Controller
 {
     /**
@@ -24,9 +30,10 @@ class VerificationController extends Controller
     /**
      * Mark the user's email address as verified.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\User $user
-     * @return \Illuminate\Http\JsonResponse
+     * @param Request $request
+     * @param User    $user
+     *
+     * @return JsonResponse
      */
     public function verify(Request $request, User $user)
     {
@@ -54,8 +61,8 @@ class VerificationController extends Controller
     /**
      * Resend the email verification notification.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param Request $request
+     * @return JsonResponse
      */
     public function resend(Request $request)
     {

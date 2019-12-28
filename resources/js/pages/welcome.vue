@@ -1,61 +1,40 @@
 <template>
   <div>
-    <div class="top-right links">
+    <div class="flex-end mt-3 links">
       <template v-if="authenticated">
         <router-link :to="{ name: 'home' }">
-          {{ $t('home') }}
+          {{ $t("home") }}
         </router-link>
       </template>
       <template v-else>
         <router-link :to="{ name: 'login' }">
-          {{ $t('login') }}
+          {{ $t("login") }}
         </router-link>
         <router-link :to="{ name: 'register' }">
-          {{ $t('register') }}
+          {{ $t("register") }}
         </router-link>
       </template>
     </div>
 
-    <div class="text-center">
-      <div class="title mb-4">
-        {{ title }}
-      </div>
-
-      <div class="links">
-        <a href="https://github.com/cretueusebiu/laravel-vue-spa">github.com/cretueusebiu/laravel-vue-spa</a>
-      </div>
+    <div class="text-center text-6xl mt-64 select-none">
+      {{ title }}
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 
 export default {
-  layout: 'basic',
-
-  metaInfo () {
-    return { title: this.$t('home') }
+  layout: "basic",
+  metaInfo() {
+    return { title: this.$t("home") };
   },
-
   data: () => ({
     title: window.config.appName
   }),
-
   computed: mapGetters({
-    authenticated: 'auth/check'
+    authenticated: "auth/check"
   })
-}
+};
 </script>
-
-<style scoped>
-.top-right {
-  position: absolute;
-  right: 10px;
-  top: 18px;
-}
-
-.title {
-  font-size: 85px;
-}
-</style>

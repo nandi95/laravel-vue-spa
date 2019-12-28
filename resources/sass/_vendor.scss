@@ -1,0 +1,33 @@
+@import '~vue-material-design-icons/styles.css';
+@import "~vue-select/src/scss/vue-select.scss";
+.vs__dropdown-toggle{
+  min-width: 78px;
+}
+
+
+.material-design-icon.icon-big {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+.material-design-icon.icon-big > .material-design-icon__svg {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.material-design-icon.icon-bigger {
+  height: 2rem;
+  width: 2rem;
+}
+.material-design-icon.icon-bigger > .material-design-icon__svg {
+  height: 2rem;
+  width: 2rem;
+}
+
+.material-design-icon.icon-biggest {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+.material-design-icon.icon-biggest > .material-design-icon__svg {
+  height: 2.5rem;
+  width: 2.5rem;
+}

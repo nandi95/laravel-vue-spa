@@ -1,17 +1,30 @@
+# NPM
 /node_modules
-/.idea
-/public/hot
+npm-debug.log
+
+# Storage Excludes
 /public/storage
 /storage/*.key
+/public/hot
+/storage/clockwork
+/public/**/*.js
+/public/**/*.css
+
+# Vendor Exclusions
 /vendor
-/public/dist
-/public/build
-/public/mix-manifest.json
+/resources/assets/vendor
+/workbench
+
+# Environment exclusions
 .env
-.phpunit.result.cache
+/.idea
 Homestead.json
 Homestead.yaml
-npm-debug.log
-yarn-error.log
+.php_cs.cache
+debug.log
+
+
+/public/mix-manifest.json
+.phpunit.result.cache
 phpunit.dusk.xml
-*.code-workspace
+.js.LICENSE

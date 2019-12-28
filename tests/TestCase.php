@@ -2,11 +2,77 @@
 
 namespace Tests;
 
+use App\Exceptions\Handler;
+use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
+/**
+ * Class TestCase
+ *
+ * @package Tests
+ */
 abstract class TestCase extends BaseTestCase
 {
     use RefreshDatabase;
     use CreatesApplication;
+    use DatabaseMigrations;
+
+    /**
+     * Disable Laravel's default exception handler and throw the exception.
+     *
+     * @return void
+     */
+    protected function disableExceptionHandling()
+    {
+        $this->app->instance(ExceptionHandler::class, new class extends Handler {
+            public function __construct() {}
+            public function report(\Exception $e) {}
+            public function render($request, \Exception $e) {
+                throw $e;
+            }
+        });
+    }
+
+    /**
+     * Call protected/private method of a class.
+     *
+     * @param object &$object
+     * @param string $methodName
+     * @param array  $parameters
+     *
+     * @return mixed
+     *
+     * @throws \ReflectionException
+     */
+    public function invokePrivateMethod(&$object, $methodName, array $parameters = [])
+    {
+        $reflection = new \ReflectionClass(get_class($object));
+        $method     = $reflection->getMethod($methodName);
+        $method->setAccessible(true);
+
+        return $method->invokeArgs($object, $parameters);
+    }
+
+
+    /**
+     * Set protected/private property of a class.
+     *
+     * @param object &$object
+     * @param string $propertyName
+     * @param mixed  $value
+     *
+     * @return void
+     *
+     * @throws \ReflectionException
+     */
+    public function setPrivateValue(&$object, string $propertyName, $value)
+    {
+        $reflection = new \ReflectionClass(get_class($object));
+        $property   = $reflection->getProperty($propertyName);
+
+        $property->setAccessible(true);
+        $property->setValue($object, $value);
+    }
 }

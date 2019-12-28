@@ -2,6 +2,11 @@
 
 namespace Tests\Browser\Pages;
 
+/**
+ * Class Register
+ *
+ * @package Tests\Browser\Pages
+ */
 class Register extends Page
 {
     /**

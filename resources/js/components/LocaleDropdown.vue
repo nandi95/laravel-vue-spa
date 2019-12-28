@@ -1,38 +1,51 @@
 <template>
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" role="button"
-       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-    >
-      {{ locales[locale] }}
-    </a>
-    <div class="dropdown-menu">
-      <a v-for="(value, key) in locales" :key="key" class="dropdown-item" href="#"
-         @click.prevent="setLocale(key)"
-      >
-        {{ value }}
-      </a>
-    </div>
-  </li>
+  <div>
+    <v-select
+      :options="availableLocales"
+      @input="setLocale"
+      v-model="lang"
+      :clearable="false"
+    />
+  </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { loadMessages } from '~/plugins/i18n'
+import { mapGetters } from "vuex";
+import { loadMessages } from "~/plugins/i18n";
 
 export default {
-  computed: mapGetters({
-    locale: 'lang/locale',
-    locales: 'lang/locales'
-  }),
-
+  computed: {
+    availableLocales: function() {
+      return Object.keys(this.locales).map(key => {
+        return {
+          label: this.locales[key],
+          code: key
+        };
+      });
+    },
+    currentLocale: function() {
+      return this.availableLocales.find(locale => locale.code === this.locale);
+    },
+    ...mapGetters({
+      locale: "lang/locale",
+      locales: "lang/locales"
+    })
+  },
+  data() {
+    return {
+      lang: null
+    };
+  },
+  mounted() {
+    this.lang = this.currentLocale;
+  },
   methods: {
-    setLocale (locale) {
-      if (this.$i18n.locale !== locale) {
-        loadMessages(locale)
-
-        this.$store.dispatch('lang/setLocale', { locale })
+    setLocale(locale) {
+      if (this.$i18n.locale !== locale.code) {
+        loadMessages(locale.code);
+        this.$store.dispatch("lang/setLocale", locale.code);
       }
     }
   }
-}
+};
 </script>

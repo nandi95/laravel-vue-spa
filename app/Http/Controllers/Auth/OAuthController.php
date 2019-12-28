@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use App\OAuthProvider;
+use App\Models\User;
+use App\Models\OAuthProvider;
 use App\Http\Controllers\Controller;
 use App\Exceptions\EmailTakenException;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+/**
+ * Class OAuthController
+ *
+ * @package App\Http\Controllers\Auth
+ */
 class OAuthController extends Controller
 {
     use AuthenticatesUsers;
@@ -21,15 +28,16 @@ class OAuthController extends Controller
     public function __construct()
     {
         config([
-            'services.github.redirect' => route('oauth.callback', 'github'),
+            'services.github.redirect' => route('api.guest.oauth.callback', 'github'),
         ]);
     }
 
     /**
      * Redirect the user to the provider authentication page.
      *
-     * @param  string $provider
-     * @return \Illuminate\Http\RedirectResponse
+     * @param string $provider
+     *
+     * @return array
      */
     public function redirectToProvider($provider)
     {
@@ -41,8 +49,11 @@ class OAuthController extends Controller
     /**
      * Obtain the user information from the provider.
      *
-     * @param  string $driver
-     * @return \Illuminate\Http\Response
+     * @param string $provider
+     *
+     * @return Factory|View
+     *
+     * @throws EmailTakenException
      */
     public function handleProviderCallback($provider)
     {
@@ -61,9 +72,12 @@ class OAuthController extends Controller
     }
 
     /**
-     * @param  string $provider
-     * @param  \Laravel\Socialite\Contracts\User $sUser
-     * @return \App\User|false
+     * @param string                            $provider
+     * @param \Laravel\Socialite\Contracts\User $user
+     *
+     * @return User|false
+     *
+     * @throws EmailTakenException
      */
     protected function findOrCreateUser($provider, $user)
     {
@@ -88,14 +102,16 @@ class OAuthController extends Controller
     }
 
     /**
-     * @param  string $provider
-     * @param  \Laravel\Socialite\Contracts\User $sUser
-     * @return \App\User
+     * @param string                            $provider
+     * @param \Laravel\Socialite\Contracts\User $sUser
+     *
+     * @return User
      */
     protected function createUser($provider, $sUser)
     {
         $user = User::create([
-            'name' => $sUser->getName(),
+            'first_name' => $sUser->user['first_name'],
+            'last_name' => $sUser->user['last_name'],
             'email' => $sUser->getEmail(),
             'email_verified_at' => now(),
         ]);
