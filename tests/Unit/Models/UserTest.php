@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Unit\Models;
 
 use App\Models\OAuthProvider;
 use App\Models\User;
@@ -17,6 +17,20 @@ use Tests\TestCase;
 class UserTest extends TestCase
 {
     /**
+     * @var User $user
+     */
+    public $user;
+
+    /**
+     * @inheritDoc
+     */
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->user = factory(User::class)->create();
+    }
+
+    /**
      * @test
      *
      * @return void
@@ -25,11 +39,10 @@ class UserTest extends TestCase
     {
         // Arrange
         factory(OAuthProvider::class, 2)->create();
-        $user = factory(User::class)->create();
-        factory(OAuthProvider::class)->create(['user_id' => $user->getKey()]);
+        factory(OAuthProvider::class)->create(['user_id' => $this->user->getKey()]);
 
         // Assert
-        $this->assertCount(1, $user->oauthProviders);
+        $this->assertCount(1, $this->user->oauthProviders);
     }
 
 
@@ -37,15 +50,16 @@ class UserTest extends TestCase
      * @test
      *
      * @return void
+     *
+     * @throws \Exception
      */
     public function deletion_deletes_relating_entities()
     {
         // Arrange
-        $user = factory(User::class)->create();
-        factory(OAuthProvider::class)->create(['user_id' => $user->getKey()]);
+        factory(OAuthProvider::class)->create(['user_id' => $this->user->getKey()]);
 
         // Act
-        $user->delete();
+        $this->user->delete();
 
         // Assert
         $this->assertSame(0, OAuthProvider::count());

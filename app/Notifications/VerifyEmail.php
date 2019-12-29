@@ -22,7 +22,7 @@ class VerifyEmail extends Notification
     protected function verificationUrl($notifiable)
     {
         $url = URL::temporarySignedRoute(
-            'api.guest.verification.verify', Carbon::now()->addMinutes(60), ['user' => $notifiable->id]
+            'api.guest.verification.verify', Carbon::now()->addMinutes(60), ['user' => $notifiable->getKey()]
         );
 
         return str_replace('/api', '', $url);

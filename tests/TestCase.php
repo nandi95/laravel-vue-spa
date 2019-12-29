@@ -7,6 +7,7 @@ use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Tests\Traits\InteractsWithPermissions;
 
 /**
  * Class TestCase
@@ -18,6 +19,22 @@ abstract class TestCase extends BaseTestCase
     use RefreshDatabase;
     use CreatesApplication;
     use DatabaseMigrations;
+
+    /**
+     * Boot the testing helper traits.
+     *
+     * @return array
+     */
+    protected function setUpTraits()
+    {
+        $uses = parent::setUpTraits();
+
+        if (isset($uses[InteractsWithPermissions::class])) {
+            $this->setupInteractsWithPermissionsTrait();
+        }
+
+        return $uses;
+    }
 
     /**
      * Disable Laravel's default exception handler and throw the exception.

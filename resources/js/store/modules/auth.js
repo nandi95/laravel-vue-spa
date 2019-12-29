@@ -14,7 +14,9 @@ export const getters = {
   user: state => state.user,
   token: state => state.token,
   check: state => state.user !== null,
-  hasPreLoginRoute: state => state.preLoginRoute !== null
+  hasPreLoginRoute: state => state.preLoginRoute !== null,
+  roles: state => state.user.roles,
+  permissions: state => state.user.permissions
 };
 
 // mutations

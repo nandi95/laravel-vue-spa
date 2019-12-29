@@ -3,6 +3,7 @@
 namespace Tests\Feature\User;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Authenticated;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Hash;
 
@@ -26,7 +27,7 @@ class UserTest extends TestCase
         parent::setUp();
 
         $this->user = factory(User::class)->create();
-        $this->actingAs($this->user);
+
     }
 
     /**
@@ -36,7 +37,9 @@ class UserTest extends TestCase
      */
     public function get_user()
     {
-        $this->disableExceptionHandling();
+        $this->app['events']->listen(Authenticated::class, function () {
+            dd(1);
+        });
         // Act
         $response = $this->getJson(route('api.dashboard.me'));
 

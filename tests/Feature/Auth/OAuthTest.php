@@ -83,7 +83,7 @@ class OAuthTest extends TestCase
             'email'      => 'test@example.com',
         ]);
         $this->assertDatabaseHas('oauth_providers', [
-            'user_id'          => User::first()->id,
+            'user_id'          => User::first()->getKey(),
             'provider'         => 'github',
             'provider_user_id' => '123',
             'access_token'     => 'access-token',
@@ -114,7 +114,7 @@ class OAuthTest extends TestCase
             ->assertSuccessful();
 
         $this->assertDatabaseHas('oauth_providers', [
-            'user_id'       => $user->id,
+            'user_id'       => $user->getKey(),
             'access_token'  => 'updated-access-token',
             'refresh_token' => 'updated-refresh-token',
         ]);

@@ -59,7 +59,7 @@ For other providers you may need to set the appropriate keys in `config/services
 
 ## Email Verification
 
-To enable email verification make sure that your `App\User` model implements the `Illuminate\Contracts\Auth\MustVerifyEmail` contract.
+To enable email verification make sure that your `App\Models\User` model implements the `Illuminate\Contracts\Auth\MustVerifyEmail` contract.
 
 ## Changelog
 
@@ -83,6 +83,7 @@ Only the major notable changes.
  - Added material design icons
  - Added vue toastify
  - Updated styling throughout
+ - Implemented frontend roles/permissions
 
 ***
 
@@ -97,4 +98,5 @@ Only the major notable changes.
 - Moved models into Models/ directory
 - Added StrongPassword rule
 - Added base model
+- Added spatie permissions
 

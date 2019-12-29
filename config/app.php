@@ -172,7 +172,7 @@ return [
          * Package Service Providers...
          */
         Clockwork\Support\Laravel\ClockworkServiceProvider::class,
-
+        Spatie\Permission\PermissionServiceProvider::class,
         /*
          * Application Service Providers...
          */

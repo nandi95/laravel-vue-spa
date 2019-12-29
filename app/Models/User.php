@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Authorisation\Permission;
 use App\Notifications\VerifyEmail;
 use App\Notifications\ResetPassword;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -10,6 +11,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
+use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -26,8 +28,13 @@ class User extends BaseModel implements
     AuthorizableContract,
     CanResetPasswordContract
 {
-    use Notifiable, SoftDeletes;
-    use \Illuminate\Auth\Authenticatable, Authorizable, CanResetPassword, \Illuminate\Auth\MustVerifyEmail;
+    use Notifiable,
+        SoftDeletes,
+        HasRoles,
+        \Illuminate\Auth\Authenticatable,
+        Authorizable,
+        CanResetPassword,
+        \Illuminate\Auth\MustVerifyEmail;
 
     /**
      * The attributes that are mass assignable.
@@ -121,5 +128,21 @@ class User extends BaseModel implements
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+
+    /**
+     * This fix will return the default guard name set at permission creation
+     * as opposed to returning by the config's provider or the first
+     * guard item
+     *
+     * @see Spatie\Permission\Models\Permission@__construct
+     * @see Spatie\Permission\Traits\HasPermissions@getDefaultGuardName
+     *
+     * @return string
+     */
+    public function getDefaultGuardName(): string
+    {
+        return (new Permission)->guard_name;
     }
 }

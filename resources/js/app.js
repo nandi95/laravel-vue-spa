@@ -6,6 +6,8 @@ import App from "~/components/App";
 
 import "~/plugins";
 import "~/components";
+import "~/mixins";
+import "~/directives";
 
 Vue.config.productionTip = false;
 

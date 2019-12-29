@@ -25,7 +25,7 @@ class VerificationTest extends TestCase
     public function can_verify_email()
     {
         $user = factory(User::class)->create(['email_verified_at' => null]);
-        $url  = URL::temporarySignedRoute('api.guest.verification.verify', now()->addMinutes(60), ['user' => $user->id]);
+        $url  = URL::temporarySignedRoute('api.guest.verification.verify', now()->addMinutes(60), ['user' => $user->getKey()]);
 
         Event::fake();
 
@@ -46,7 +46,7 @@ class VerificationTest extends TestCase
     public function can_not_verify_if_already_verified()
     {
         $user = factory(User::class)->create();
-        $url  = URL::temporarySignedRoute('api.guest.verification.verify', now()->addMinutes(60), ['user' => $user->id]);
+        $url  = URL::temporarySignedRoute('api.guest.verification.verify', now()->addMinutes(60), ['user' => $user->getKey()]);
 
         $this->postJson($url)
             ->assertStatus(400)
@@ -62,7 +62,7 @@ class VerificationTest extends TestCase
     {
         $user = factory(User::class)->create(['email_verified_at' => null]);
 
-        $this->postJson("/api/email/verify/{$user->id}")
+        $this->postJson("/api/email/verify/{$user->getKey()}")
             ->assertStatus(400)
             ->assertJsonFragment(['status' => 'The verification link is invalid.']);
     }
