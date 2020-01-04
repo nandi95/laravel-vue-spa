@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Traits\TimeZoneAware;
+use App\Models\Traits\TimeZoneAware;
 use Illuminate\Database\Eloquent\Model;
 
 /**

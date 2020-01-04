@@ -9,3 +9,7 @@ export const SET_PRE_LOGIN_ROUTE = "SET_PRE_LOGIN_ROUTE";
 
 // lang.js
 export const SET_LOCALE = "SET_LOCALE";
+
+// theme.js
+export const SET_THEME = "SET_THEME";
+export const SET_DARK_MODE = "SET_DARK_MODE";

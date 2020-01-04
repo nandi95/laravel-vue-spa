@@ -46,6 +46,11 @@ export default [
         path: "password",
         name: "settings.password",
         component: page("settings/password.vue")
+      },
+      {
+        path: "preferences",
+        name: "settings.preferences",
+        component: page("settings/preferences.vue")
       }
     ]
   },

@@ -25,3 +25,6 @@
     @apply flex flex-row flex-wrap justify-end items-center content-center;
   }
 }
+.flex-col {
+  flex-direction: column !important;
+}

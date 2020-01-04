@@ -94,9 +94,9 @@
 
           <div class="flex-between">
             <!-- Submit Button -->
-            <v-button :loading="form.busy">
+            <Button :loading="form.busy">
               {{ $t("register") }}
-            </v-button>
+            </Button>
 
             <!-- GitHub Register Button -->
             <login-with-github />

@@ -49,9 +49,9 @@
 
           <div class="flex-around">
             <!-- Submit Button -->
-            <v-button :loading="form.busy">
+            <Button primary :loading="form.busy">
               {{ $t("login") }}
-            </v-button>
+            </Button>
 
             <!-- GitHub Login Button -->
             <login-with-github />
@@ -65,12 +65,10 @@
 <script>
 import Form from "vform";
 import LoginWithGithub from "~/components/LoginWithGithub";
-import Toggle from "../../components/Toggle";
 
 export default {
   middleware: "guest",
   components: {
-    Toggle,
     LoginWithGithub
   },
   metaInfo() {

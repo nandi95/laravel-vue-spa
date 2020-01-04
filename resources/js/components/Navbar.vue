@@ -1,75 +1,83 @@
 <template>
-  <nav class="shadow py-3">
-    <div class="container flex-between">
+  <nav class="shadow py-3 bg-white dark:bg-gray-800">
+    <div class="container flex-between mx-auto">
       <div class="flex-between">
         <router-link
           :to="{ name: user ? 'home' : 'welcome' }"
-          class="mr-3 text-xl text-gray-700"
+          class="mr-3 my-3 text-xl text-gray-700"
+          :style="$themeText"
           v-text="appName"
         />
         <LocaleDropdown />
       </div>
       <div>
-        <ul class="flex-between">
+        <div class="flex-between">
           <!-- Authenticated -->
-          <li v-if="user" class="relative">
-            <a
-              role="button"
-              class="flex-between"
-              aria-haspopup="true"
-              aria-expanded="false"
-              @click.prevent="menuOpen = true"
-            >
-              <img
-                :src="user.photoUrl"
-                class="rounded-circle profile-photo mr-2"
-              />
-              <span>{{ user.firstName + " " + user.lastName }}</span>
-            </a>
-            <transition name="fade">
-              <div
-                v-if="menuOpen"
-                v-click-outside="
-                  () => {
-                    menuOpen = false;
-                  }
-                "
-                class="flex-around dropdown absolute"
+          <template v-if="user">
+            <ThemeSwitcher class="mr-4 my-3" />
+            <div class="relative">
+              <a
+                role="button"
+                class="flex-between"
+                aria-haspopup="true"
+                aria-expanded="false"
+                @click.prevent="menuOpen = true"
               >
-                <router-link
-                  :to="{ name: 'settings.profile' }"
-                  class="dropdown-item"
+                <img
+                  :src="user.photoUrl"
+                  class="rounded-circle profile-photo mr-2"
+                />
+                <span class="text-body">{{
+                  user.firstName + " " + user.lastName
+                }}</span>
+              </a>
+              <transition name="fade">
+                <div
+                  v-if="menuOpen"
+                  v-click-outside="
+                    () => {
+                      menuOpen = false;
+                    }
+                  "
+                  class="flex-around dropdown absolute"
                 >
-                  {{ $t("settings") }}
-                </router-link>
-                <a href="#" class="dropdown-item" @click.prevent="logout">
-                  {{ $t("logout") }}
-                </a>
-              </div>
-            </transition>
-          </li>
+                  <router-link
+                    :to="{ name: 'settings.profile' }"
+                    class="dropdown-item"
+                  >
+                    {{ $t("settings") }}
+                  </router-link>
+                  <a href="#" class="dropdown-item" @click.prevent="logout">
+                    {{ $t("logout") }}
+                  </a>
+                </div>
+              </transition>
+            </div>
+          </template>
           <!-- Guest -->
           <template v-else>
-            <li class="mx-1">
-              <router-link
-                :to="{ name: 'login' }"
-                class="nav-link"
-                active-class="active"
-              >
-                {{ $t("login") }}
-              </router-link>
-            </li>
-            <li class="mx-1">
-              <router-link
-                :to="{ name: 'register' }"
-                class="nav-link"
-                active-class="active"
-              >
-                {{ $t("register") }}
-              </router-link>
-            </li>
+            <ul>
+              <li class="mx-1">
+                <router-link
+                  :to="{ name: 'login' }"
+                  class="nav-link"
+                  active-class="active"
+                >
+                  {{ $t("login") }}
+                </router-link>
+              </li>
+              <li class="mx-1">
+                <router-link
+                  :to="{ name: 'register' }"
+                  class="nav-link"
+                  active-class="active"
+                >
+                  {{ $t("register") }}
+                </router-link>
+              </li>
+            </ul>
           </template>
-        </ul>
+        </div>
       </div>
     </div>
   </nav>
@@ -80,9 +88,11 @@ import { mapGetters } from "vuex";
 import LocaleDropdown from "./LocaleDropdown";
 // import clickOutside from "~/directives/click-outside";
 import { directive as clickOutside } from "vue-on-click-outside";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 export default {
   components: {
+    ThemeSwitcher,
     LocaleDropdown
   },
   directives: {

@@ -23,6 +23,7 @@
   "reset_password": "Restablecer la contraseña",
   "send_password_reset_link": "Enviar Enlace de Restablecimiento de Contraseña",
   "settings": "Configuraciones",
+  "preferences": "Preferencias",
   "profile": "Perfil",
   "your_info": "Tu Información",
   "info_updated": "¡Tu información ha sido actualizada!",
@@ -30,6 +31,7 @@
   "your_password": "Tu Contraseña",
   "password_updated": "¡Tu contraseña ha sido actualizada!",
   "new_password": "Nueva Contraseña",
+  "old_password": "Contraseña Anterior",
   "login_with": "Iniciar Sesión con",
   "register_with": "Registro con"
 }

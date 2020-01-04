@@ -22,10 +22,11 @@ class UserResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'first_name' => $this->first_name,
-            'last_name' => $this->last_name,
-            'photo_url' => $this->photo_url,
-            'roles' => $this->resource->roles->pluck('name')->toArray(),
+            'first_name'  => $this->first_name,
+            'last_name'   => $this->last_name,
+            'photo_url'   => $this->photo_url,
+            'email'       => $this->email,
+            'roles'       => $this->resource->roles->pluck('name')->toArray(),
             'permissions' => $this->resource->getAllPermissions()->pluck('name')->toArray()
         ];
     }

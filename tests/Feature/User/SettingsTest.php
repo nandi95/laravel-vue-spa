@@ -39,7 +39,7 @@ class SettingsTest extends TestCase
         // Act
         $response = $this->patchJson('/api/settings/profile', [
             'firstName' => 'Test',
-            'email'      => 'test@test.app',
+            'email'     => 'test@test.app',
         ]);
 
         // Assert
@@ -59,8 +59,10 @@ class SettingsTest extends TestCase
      */
     public function update_password()
     {
+//        $this->withoutExceptionHandling();
         // Act
         $response = $this->patchJson('/api/settings/password', [
+            'old_password'              => 'password',
             'password'              => 'updated-password',
             'password_confirmation' => 'updated-password',
         ]);

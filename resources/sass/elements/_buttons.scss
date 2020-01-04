@@ -1,10 +1,10 @@
 .btn {
-  @apply px-4 py-2 border rounded transition-all;
+  @apply px-4 py-2 rounded transition-all;
   &:hover {
     @apply transition-all;
   }
 }
-.btn-dark {
+.btn-secondary {
   @apply bg-gray-700 text-white transition-all;
   &:hover {
     @apply bg-gray-900 transition-all;

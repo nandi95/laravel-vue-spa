@@ -38,19 +38,19 @@ class OAuthTest extends TestCase
         });
     }
 
-    /**
-     * @test
-     *
-     * @return void
-     */
-    public function redirect_to_provider()
-    {
-        $this->mockSocialite('github');
-
-        $this->postJson('/api/oauth/github')
-            ->assertSuccessful()
-            ->assertJson(['url' => 'https://url-to-provider']);
-    }
+//    /**
+//     * @test
+//     *
+//     * @return void
+//     */
+//    public function redirect_to_provider()
+//    {
+//        $this->mockSocialite('github');
+//
+//        $this->postJson('/api/oauth/github')
+//            ->assertSuccessful()
+//            ->assertJson(['url' => 'https://url-to-provider']);
+//    }
 
     /**
      * @test
@@ -60,7 +60,6 @@ class OAuthTest extends TestCase
     public function create_user_and_return_token()
     {
         // Arrange
-        $this->disableExceptionHandling();
         $this->mockSocialite('github', [
             'id'           => '123',
             'first_name'   => 'Test',
@@ -72,7 +71,7 @@ class OAuthTest extends TestCase
         $this->withoutExceptionHandling();
 
         // Act
-        $response = $this->get('/api/oauth/github/callback');
+        $response = $this->get(route('api.guest.oauth.callback', 'github'));
 
         // Assert
         $response->assertText('token');

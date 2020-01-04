@@ -13,7 +13,9 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed'           => 'These credentials do not match our records.',
+    'throttle'         => 'Too many login attempts. Please try again in :seconds seconds.',
+    'already_password' => 'This is already your password.',
+    'strong_password'  => 'Your password must be more than 8 characters long, should contain at least 1 uppercase, 1 lowercase, 1 numeric and 1 special character.'
 
 ];

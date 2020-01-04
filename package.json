@@ -16,6 +16,7 @@
     "js-cookie": "^2.2.1",
     "vform": "^1.0.1",
     "vue": "^2.6.11",
+    "vue-color-picker-wheel": "^0.4.3",
     "vue-i18n": "^8.15.3",
     "vue-material-design-icons": "^4.4.0",
     "vue-meta": "^2.3.1",
@@ -44,6 +45,7 @@
     "sass": "^1.24.0",
     "sass-loader": "^8.0.0",
     "tailwindcss": "^1.1.4",
+    "tailwindcss-dark-mode": "^1.1.1",
     "tailwindcss-transitions": "^2.1.0",
     "vue-template-compiler": "^2.6.11",
     "webpack-bundle-analyzer": "^3.6.0"

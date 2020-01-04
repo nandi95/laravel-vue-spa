@@ -3,13 +3,13 @@
     :type="nativeType"
     :disabled="loading"
     :class="{
-      [`btn-${type}`]: true,
-      'btn-block': block,
-      'btn-lg': large,
       'btn-loading': loading
     }"
-    class="btn"
+    :style="theme"
+    class="btn btn-secondary"
     @click="$emit('click')"
+    @mouseenter="addStyle"
+    @mouseleave="removeStyle"
   >
     <slot />
   </button>
@@ -17,27 +17,27 @@
 
 <script>
 export default {
-  name: "VButton",
+  name: "Button",
   props: {
-    type: {
-      type: String,
-      default: "primary"
+    primary: { type: Boolean, default: false },
+    nativeType: { type: String, default: "submit" },
+    loading: { type: Boolean, default: false }
+  },
+  computed: {
+    theme() {
+      return this.primary ? this.$theme : {};
+    }
+  },
+  methods: {
+    addStyle(ev) {
+      if (this.primary) {
+        this.$addHoverAccentColor(ev);
+      }
     },
-    nativeType: {
-      type: String,
-      default: "submit"
-    },
-    loading: {
-      type: Boolean,
-      default: false
-    },
-    block: {
-      type: Boolean,
-      default: false
-    },
-    large: {
-      type: Boolean,
-      default: false
+    removeStyle(ev) {
+      if (this.primary) {
+        this.$removeHoverAccentColor(ev);
+      }
     }
   }
 };

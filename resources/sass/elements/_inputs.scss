@@ -5,6 +5,22 @@
     @apply transition-all shadow-inner;
   }
   &:disabled {
-    @apply transition-all bg-gray-200 border-none;
+    @apply transition-all bg-gray-300 border-none;
   }
+  &+.is-invalid {
+    @apply transition-all bg-red-100 border-red-300;
+  }
+}
+.mode-dark .input {
+  @apply transition-all px-2 py-1 border rounded bg-gray-400;
+
+  &:active, &:focus {
+    @apply transition-all bg-gray-200 shadow-inner;
+  }
+  &:disabled {
+    @apply transition-all bg-gray-600 border-none;
+  }
+}
+.label {
+  @apply text-body;
 }

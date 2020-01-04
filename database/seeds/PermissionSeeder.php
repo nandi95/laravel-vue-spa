@@ -17,6 +17,7 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         $this->crudPermissions();
+        $this->uniquePermissions();
     }
 
     /**
@@ -32,12 +33,25 @@ class PermissionSeeder extends Seeder
         );
     }
 
+    /**
+     * Dedicated for running unique one-off permissions.
+     * @return void
+     */
+    public function uniquePermissions()
+    {
+        $permissionNames = [];
+        foreach ($permissionNames as $name) {
+            Permission::create([
+                'name' => $name
+            ]);
+        }
+    }
 
     /**
      * First or create a permission
      *
      * @param PermissionGroup $group
-     * @param array           $permissions
+     * @param array $permissions
      *
      * @return void
      */
@@ -52,16 +66,16 @@ class PermissionSeeder extends Seeder
      * Seed a permission
      *
      * @param PermissionGroup $group
-     * @param string          $name
-     * @param string          $label
+     * @param string $name
+     * @param string $label
      *
      * @return Permission
      */
     protected function permission(PermissionGroup $group, $name, $label)
     {
-        $permission = Permission::firstOrNew(['name' => $name]);
+        $permission                          = Permission::firstOrNew(['name' => $name]);
         $permission[$permission->foreignKey] = $group->getKey();
-        $permission->label = $label;
+        $permission->label                   = $label;
         $permission->save();
         return $permission;
     }

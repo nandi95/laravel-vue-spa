@@ -1,0 +1,15 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\Models\BaseModel;
+
+/**
+ * Class DummyClass
+ *
+ * @package DummyNamespace
+ */
+class DummyClass extends BaseModel
+{
+    //
+}

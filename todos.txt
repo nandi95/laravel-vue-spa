@@ -1,0 +1,4 @@
+request with lifecycle for before
+theme switcher:
+    important components will be themed from the store (it saves to the server)
+    background / structural will b light and dark ( first comes from the os then saves to backend)

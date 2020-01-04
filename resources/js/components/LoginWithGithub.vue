@@ -1,5 +1,5 @@
 <template>
-  <button v-if="githubAuth" class="btn btn-dark" type="button" @click="login">
+  <button v-if="githubAuth" class="btn btn-secondary" type="button" @click="login">
     {{ $t("login_with") }}
     <GithubIcon :size="68" />
   </button>

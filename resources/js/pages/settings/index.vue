@@ -1,45 +1,52 @@
 <template>
-  <div class="row">
-    <div class="col-md-3">
+  <div class="flex-around flex-col">
+    <div class="w-full">
       <card :title="$t('settings')">
         <ul class="flex-start">
           <li v-for="tab in tabs" :key="tab.route">
             <router-link
               :to="{ name: tab.route }"
               class="nav-item"
+              v-slot="{ navigate, href }"
               active-class="active"
+              :style="$theme"
             >
-              {{ tab.name }}
+              <a
+                :href="href"
+                @click="navigate"
+                @mouseenter="$addHoverAccentColor"
+                @mouseleave="$removeHoverAccentColor($event)"
+              >
+                {{ tab.name }}
+              </a>
             </router-link>
           </li>
         </ul>
       </card>
     </div>
-
-    <div class="col-md-9">
-      <transition name="fade" mode="out-in">
-        <router-view />
-      </transition>
-    </div>
+    <transition name="fade" mode="out-in">
+      <router-view />
+    </transition>
   </div>
 </template>
 
 <script>
 export default {
   middleware: "auth",
-
   computed: {
     tabs() {
       return [
         {
-          icon: "user",
           name: this.$t("profile"),
           route: "settings.profile"
         },
         {
-          icon: "lock",
           name: this.$t("password"),
           route: "settings.password"
+        },
+        {
+          name: this.$t("preferences"),
+          route: "settings.preferences"
         }
       ];
     }

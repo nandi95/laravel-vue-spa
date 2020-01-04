@@ -1,12 +1,11 @@
 <template>
-  <div>
-    <v-select
-      :options="availableLocales"
-      @input="setLocale"
-      v-model="lang"
-      :clearable="false"
-    />
-  </div>
+  <v-select
+    :options="availableLocales"
+    @input="setLocale"
+    v-model="lang"
+    :clearable="false"
+    class="bg-white dark:bg-gray-400 rounded"
+  />
 </template>
 
 <script>

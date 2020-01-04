@@ -5,24 +5,42 @@
 
       <!-- Name -->
       <div class="flex-between mb-3">
-        <label for="name">{{ $t("name") }}</label>
-        <div class="col-md-7">
+        <label class="text-body sm:mr-3" for="first_name">{{
+          $t("first_name")
+        }}</label>
+        <div>
           <input
-            v-model="form.name"
-            :class="{ 'is-invalid': form.errors.has('name') }"
+            v-model="form.firstName"
+            :class="{ 'is-invalid': form.errors.has('firstName') }"
             class="input"
             type="text"
-            id="name"
-            name="name"
+            id="first_name"
+            name="firstName"
           />
-          <Error :form="form" field="name" />
+          <Error :form="form" field="firstName" />
+        </div>
+      </div>
+      <div class="flex-between mb-3">
+        <label class="text-body sm:mr-3" for="last_name">{{
+          $t("last_name")
+        }}</label>
+        <div>
+          <input
+            v-model="form.lastName"
+            :class="{ 'is-invalid': form.errors.has('lastName') }"
+            class="input"
+            type="text"
+            id="last_name"
+            name="lastName"
+          />
+          <Error :form="form" field="lastName" />
         </div>
       </div>
 
       <!-- Email -->
       <div class="flex-between mb-3">
-        <label for="email">{{ $t("email") }}</label>
-        <div class="col-md-7">
+        <label class="text-body sm:mr-3" for="email">{{ $t("email") }}</label>
+        <div>
           <input
             v-model="form.email"
             :class="{ 'is-invalid': form.errors.has('email') }"
@@ -37,9 +55,9 @@
 
       <!-- Submit Button -->
       <div class="flex-center">
-        <v-button :loading="form.busy" type="success">
+        <Button primary :loading="form.busy">
           {{ $t("update") }}
-        </v-button>
+        </Button>
       </div>
     </form>
   </card>
@@ -51,14 +69,13 @@ import { mapGetters } from "vuex";
 
 export default {
   scrollToTop: false,
-
   metaInfo() {
     return { title: this.$t("settings") };
   },
-
   data: () => ({
     form: new Form({
-      name: "",
+      lastName: "",
+      firstName: "",
       email: ""
     })
   }),

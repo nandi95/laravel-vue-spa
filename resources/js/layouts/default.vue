@@ -1,5 +1,5 @@
 <template>
-  <div class="main-layout">
+  <div class="main-layout bg-gray-100 dark:bg-gray-900" style="height: 100vh">
     <Navbar />
 
     <div class="container mt-4">

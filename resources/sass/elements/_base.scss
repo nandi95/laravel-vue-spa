@@ -1,0 +1,8 @@
+.text-body {
+  @apply text-gray-800;
+}
+
+.mode-dark .text-body {
+  @apply text-white;
+}
+

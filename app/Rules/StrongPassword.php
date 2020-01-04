@@ -26,11 +26,12 @@ class StrongPassword implements Rule
      */
     public function passes($attribute, $value)
     {
+        // more rules at: https://github.com/langleyfoxall/laravel-nist-password-rules
         $matches = null;
-        // Should have At least one Uppercase letter.
-        // At least one Lower case letter.
-        // At least one numeric value.
-        // At least one special character.
+        // Should have at least one Uppercase letter.
+        // At least one lower case letter.
+        // At least one num3r1c value.
+        // At least one spec|al character.
         // Must be more than 8 characters long.
         return preg_match('/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[¬¦`["£€()~:;.,<>|+=_#?!@$%^&*-]).{8,}$/', $value, $matches,  PREG_UNMATCHED_AS_NULL);
     }
@@ -42,6 +43,6 @@ class StrongPassword implements Rule
      */
     public function message()
     {
-        return 'Your password must be more than 8 characters long, should contain at least 1 uppercase, 1 lowercase, 1 numeric and 1 special character.';
+        return __('strong_password');
     }
 }

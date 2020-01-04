@@ -2,6 +2,7 @@ const path = require("path");
 const fs = require("fs-extra");
 const mix = require("laravel-mix");
 const tailwindcss = require("tailwindcss");
+require("laravel-mix-purgecss");
 // require("laravel-mix-versionhash");
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
@@ -17,7 +18,10 @@ if (mix.inProduction()) {
   mix
     .extract(["vue", "axios"])
     .version() // Use `laravel-mix-versionhash` for the generating correct Laravel Mix manifest file.
-    .disableNotifications();
+    .disableNotifications()
+    .purgeCss({
+      whitelist: ["dark-mode"]
+    });
   // .versionHash();
 } else {
   mix.sourceMaps();

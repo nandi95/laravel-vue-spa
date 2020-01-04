@@ -1,6 +1,8 @@
 <template>
   <card :title="$t('home')">
-    {{ $t("you_are_logged_in") }}
+    <span class="text-body">
+      {{ $t("you_are_logged_in") }}
+    </span>
   </card>
 </template>
 

@@ -1,167 +1,93 @@
 <template>
-  <div>
+  <label class="toggle">
     <input
       type="checkbox"
-      class="cbx"
-      style="display: none"
       :name="name"
+      class="checkbox-input"
+      @click="toggle"
       :checked="checked"
-      :id="name"
-      @change="$emit('change', e)"
     />
-    <label :for="name" class="toggle"><span></span></label>
-  </div>
+    <span class="slider" :style="styles" />
+  </label>
 </template>
 
 <script>
 export default {
   name: "Toggle",
   props: {
-    name: { type: String },
-    checked: { type: Boolean, default: false }
+    name: { type: String, required: true },
+    checked: { type: Boolean, default: false },
+    defaultColor: { type: String, default: "#c8c8c8" },
+    checkedColor: { type: String }
+  },
+  data() {
+    return {
+      isChecked: false
+    };
+  },
+  mounted() {
+    this.isChecked = this.checked;
+  },
+  methods: {
+    toggle(ev) {
+      this.$emit("click", ev.target.checked);
+      this.isChecked = !this.isChecked;
+    }
+  },
+  computed: {
+    styles() {
+      let obj = {};
+      if (this.isChecked) {
+        obj["background-color"] = this.checkedColor
+          ? this.checkedColor
+          : this.$themeColor;
+      } else {
+        obj["background-color"] = this.defaultColor;
+      }
+      return obj;
+    }
   }
 };
 </script>
 
-<style scoped lang="scss">
-/* TOGGLE START */
+<style lang="css">
+/* Hide default input */
+.toggle input {
+  display: none;
+}
+
+/* The container and background */
 .toggle {
   position: relative;
-  display: block;
-  width: 40px;
-  height: 20px;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  transform: translate3d(0, 0, 0);
+  display: inline-block;
+  width: 35px;
+  height: 19px;
 }
-.toggle:before {
-  content: "";
-  position: relative;
-  top: 3px;
-  left: 3px;
-  width: 34px;
-  height: 14px;
-  display: block;
-  background: #9a9999;
-  border-radius: 8px;
-  transition: background 0.2s ease;
-}
-.toggle span {
+.slider {
   position: absolute;
+  cursor: pointer;
   top: 0;
   left: 0;
-  width: 20px;
-  height: 20px;
-  display: block;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 3px 8px rgba(153, 153, 152, 0.5);
-  transition: all 0.2s ease;
+  right: 0;
+  bottom: 0;
+  border-radius: 30px;
+  transition: all 0.4s;
 }
-.toggle span:before {
+
+/* The sliding button */
+.slider:before {
+  position: absolute;
   content: "";
-  position: absolute;
-  display: block;
-  margin: -18px;
-  width: 56px;
-  height: 56px;
-  background: rgba(45, 28, 170, 0.5);
-  border-radius: 50%;
-  transform: scale(0);
-  opacity: 1;
-  pointer-events: none;
+  width: 15px;
+  height: 15px;
+  left: 2px;
+  top: 2px;
+  background-color: #eee;
+  border-radius: 15px;
+  transition: all 0.4s;
 }
 
-.cbx:checked + .toggle:before {
-  background: #d6d5da;
+input:checked + .slider:before {
+  transform: translateX(16px);
 }
-.cbx:checked + .toggle span {
-  // button on color + on hit animation color
-  background: #405a85;
-  transform: translateX(20px);
-
-  .toggle {
-    position: relative;
-    display: block;
-    width: 40px;
-    height: 20px;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    transform: translate3d(0, 0, 0);
-  }
-  .toggle:before {
-    content: "";
-    position: relative;
-    top: 3px;
-    left: 3px;
-    width: 34px;
-    height: 14px;
-    display: block;
-    background: #9a9999;
-    border-radius: 8px;
-    transition: background 0.2s ease;
-  }
-  .toggle span {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 20px;
-    height: 20px;
-    display: block;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 3px 8px rgba(20, 66, 154, 0.5);
-    transition: all 0.2s ease;
-  }
-  .toggle span:before {
-    content: "";
-    position: absolute;
-    display: block;
-    margin: -18px;
-    width: 56px;
-    height: 56px;
-    background: rgba(79, 46, 220, 0.5);
-    border-radius: 50%;
-    transform: scale(0);
-    opacity: 1;
-    pointer-events: none;
-  }
-
-  .cbx:checked + .toggle:before {
-    background: #da0228;
-  }
-  .cbx:checked + .toggle span {
-    background: #dc1215 !important;
-    transform: translateX(20px);
-    transition: all 0.2s cubic-bezier(0.8, 0.4, 0.3, 1.25),
-      background 0.15s ease;
-    box-shadow: 0 3px 8px rgba(79, 46, 220, 0.2);
-  }
-  .cbx:checked + .toggle span:before {
-    transform: scale(1);
-    opacity: 0;
-    transition: all 0.4s ease;
-  }
-
-  .center {
-    position: absolute;
-    top: calc(50% - 10px);
-    left: calc(50% - 20px);
-  }
-
-  transition: all 0.2s cubic-bezier(0.8, 0.4, 0.3, 1.25), background 0.15s ease;
-  box-shadow: 0 3px 8px rgba(24, 34, 99, 0.35);
-}
-.cbx:checked + .toggle span:before {
-  transform: scale(1);
-  opacity: 0;
-  transition: all 0.4s ease;
-}
-
-.center {
-  position: absolute;
-  top: calc(50% - 10px);
-  left: calc(50% - 20px);
-}
-/* TOGGLE END */
 </style>

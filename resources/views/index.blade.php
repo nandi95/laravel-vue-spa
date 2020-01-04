@@ -23,6 +23,9 @@ $config = [
   <script>
     window.config = @json($config);
   </script>
+  <script>
+    {{--window.notification = @json(isset($notification) ? $notification : []);--}}
+  </script>
 
   {{-- Load the application scripts --}}
 {{--  <script src="{{ mix('js/manifest.js') }}"></script>--}}

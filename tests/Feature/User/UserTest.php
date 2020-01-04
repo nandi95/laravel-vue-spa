@@ -27,7 +27,7 @@ class UserTest extends TestCase
         parent::setUp();
 
         $this->user = factory(User::class)->create();
-
+        $this->actingAs($this->user);
     }
 
     /**
@@ -37,9 +37,6 @@ class UserTest extends TestCase
      */
     public function get_user()
     {
-        $this->app['events']->listen(Authenticated::class, function () {
-            dd(1);
-        });
         // Act
         $response = $this->getJson(route('api.dashboard.me'));
 

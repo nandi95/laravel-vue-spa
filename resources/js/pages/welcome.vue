@@ -16,7 +16,7 @@
       </template>
     </div>
 
-    <div class="text-center text-6xl mt-64 select-none">
+    <div class="text-center text-6xl mt-64 select-none" :style="$themeText">
       {{ title }}
     </div>
   </div>

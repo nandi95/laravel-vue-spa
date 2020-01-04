@@ -62,9 +62,9 @@
           <!-- Submit Button -->
           <div class="form-group row">
             <div class="col-md-9 ml-md-auto">
-              <v-button :loading="form.busy">
+              <Button :loading="form.busy">
                 {{ $t("reset_password") }}
-              </v-button>
+              </Button>
             </div>
           </div>
         </form>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Settings;
 
+use App\Rules\IsNewPassword;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -26,7 +27,8 @@ class PasswordController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
-            'password' => 'required|confirmed|min:8',
+            'old_password' => 'required|password',
+            'password' => ['required', 'confirmed', 'min:8', new IsNewPassword]
         ]);
 
         $request->user()->update([

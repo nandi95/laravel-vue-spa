@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Rules\IsNewPassword;
 use App\Rules\StrongPassword;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -36,7 +37,7 @@ class ResetPasswordController extends Controller
         return [
             'token'    => 'required',
             'email'    => 'required|email',
-            'password' => ['required', 'confirmed', new StrongPassword],
+            'password' => ['required', 'confirmed', new StrongPassword, new IsNewPassword],
         ];
     }
 
@@ -44,9 +45,9 @@ class ResetPasswordController extends Controller
      * Get the response for a successful password reset.
      *
      * @param Request $request
-     * @param string  $response
+     * @param string $response
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return array
      */
     protected function sendResetResponse(Request $request, $response)
     {

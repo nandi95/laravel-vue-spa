@@ -84,6 +84,7 @@ Only the major notable changes.
  - Added vue toastify
  - Updated styling throughout
  - Implemented frontend roles/permissions
+ - Added light and dark theme + user defined main colors
 
 ***
 
