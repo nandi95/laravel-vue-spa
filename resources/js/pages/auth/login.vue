@@ -22,12 +22,12 @@
           <div class="flex-between mb-3">
             <label class="w-3/12">{{ $t("password") }}</label>
             <div class="w-7/12">
-              <input
+              <PasswordField
+                :custom-class="
+                  'input' + (form.errors.has('password') ? ' is-invalid' : '')
+                "
                 v-model="form.password"
-                :class="{ 'is-invalid': form.errors.has('password') }"
-                class="input"
-                type="password"
-                name="password"
+                name-id="password"
               />
               <Error :form="form" field="password" />
             </div>
@@ -65,10 +65,12 @@
 <script>
 import Form from "vform";
 import LoginWithGithub from "~/components/LoginWithGithub";
+import PasswordField from "../../components/PasswordField";
 
 export default {
   middleware: "guest",
   components: {
+    PasswordField,
     LoginWithGithub
   },
   metaInfo() {

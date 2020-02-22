@@ -65,6 +65,9 @@ module.exports = {
       "dark-active"
     ]
   },
+  corePlugins: {
+    transitionProperty: false
+  },
   plugins: [
     require("tailwindcss-transitions")(),
     require("tailwindcss-dark-mode")()

@@ -100,4 +100,5 @@ Only the major notable changes.
 - Added StrongPassword rule
 - Added base model
 - Added spatie permissions
+- Added websockets
 

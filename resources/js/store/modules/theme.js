@@ -1,5 +1,5 @@
 import * as types from "../mutation-types";
-import {isBoolean, isNull} from "../../utilities/utils";
+import {isNull, setDarkTheme} from "../../utilities/utils";
 
 // state
 export const state = {
@@ -21,7 +21,10 @@ export const mutations = {
 
 // getters
 export const getters = {
-  themeColor: state => (state.themeColor ? state.themeColor : "#5d5d5d"),
+  themeColor: state =>
+    state.themeColor && state.themeColor.length > 2
+      ? state.themeColor
+      : "#5e5e5e",
   darkMode: state => {
     if (isNull(state.darkMode)) {
       return (
@@ -29,7 +32,7 @@ export const getters = {
         window.matchMedia("(prefers-color-scheme: dark)").matches
       );
     }
-    return state.darkMode === "true";
+    return state.darkMode == "true";
   }
 };
 
@@ -39,6 +42,7 @@ export const actions = {
     commit(types.SET_THEME, payload);
   },
   updateDarkMode({ commit, dispatch }, payload) {
+    setDarkTheme(payload);
     commit(types.SET_DARK_MODE, payload);
   }
 };

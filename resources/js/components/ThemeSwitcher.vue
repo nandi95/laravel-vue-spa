@@ -19,17 +19,8 @@ import Toggle from "./Toggle";
 export default {
   name: "ThemeSwitcher",
   components: { Toggle, Sun, Moon },
-  mounted() {
-    let html = document.getElementsByTagName("html")[0];
-    if (this.$store.getters["theme/darkMode"]) {
-      html.classList.add("mode-dark");
-    } else {
-      html.classList.remove("mode-dark");
-    }
-  },
   methods: {
     toggleTheme(value) {
-      document.getElementsByTagName("html")[0].classList.toggle("mode-dark");
       this.$store.dispatch("theme/updateDarkMode", value);
     }
   }

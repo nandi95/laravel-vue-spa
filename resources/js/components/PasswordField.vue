@@ -13,7 +13,7 @@
       :name="nameId"
       class="pass-field"
       :required="isRequired"
-      @change="$emit('change', $event)"
+      @input="$emit('input', $event.target.value)"
     />
   </div>
 </template>
