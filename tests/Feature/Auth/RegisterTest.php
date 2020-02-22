@@ -2,7 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -23,7 +25,8 @@ class RegisterTest extends TestCase
         $response = $this->postJson(route('api.guest.auth.register'), factory(User::class)->state("toRegister")->make()->getAttributes());
 
         // Assert
-        $response->assertSuccessful();
+        $response->assertSuccessful()
+            ->assertJsonStructure(new User instanceof MustVerifyEmail ? ['status'] : ['data' => ['id', 'email']]);
     }
 
     /**

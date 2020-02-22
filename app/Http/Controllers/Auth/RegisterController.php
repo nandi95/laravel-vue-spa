@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Rules\StrongPassword;
 use Illuminate\Http\JsonResponse;
@@ -36,7 +37,7 @@ class RegisterController extends Controller
      * @param Request $request
      * @param User    $user
      *
-     * @return JsonResponse
+     * @return UserResource|JsonResponse
      */
     protected function registered(Request $request, User $user)
     {
@@ -46,7 +47,7 @@ class RegisterController extends Controller
             return response()->json(['status' => trans('verification.sent')]);
         }
 
-        return response()->json($user, 201);
+        return new UserResource($user);
     }
 
     /**
