@@ -17,10 +17,7 @@ class Kernel extends ConsoleKernel
      *
      * @var array
      */
-    protected $commands = [
-        // Generators
-        \App\Console\Commands\Generators\Model::class,
-    ];
+    protected $commands = [];
 
     /**
      * Define the application's command schedule.

@@ -101,4 +101,5 @@ Only the major notable changes.
 - Added base model
 - Added spatie permissions
 - Added websockets
+- Upgraded to 7.x
 

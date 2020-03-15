@@ -1,0 +1,17 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Models\BaseModel;
+
+class {{ class }} extends BaseModel
+{
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        //
+    ];
+}
