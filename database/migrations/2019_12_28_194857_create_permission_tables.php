@@ -17,14 +17,14 @@ class CreatePermissionTables extends Migration
         $columnNames = config('permission.column_names');
 
         Schema::create($tableNames['permission_groups'], function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('name');
             $table->timestamps();
         });
 
         Schema::create($tableNames['permissions'], function (Blueprint $table) use ($tableNames) {
             $permission = new \App\Models\Authorisation\Permission();
-            $table->bigIncrements('id');
+            $table->id();
             $table->unsignedBigInteger($permission->foreignKey)->nullable();
             $table->string('label')->nullable();
             $table->string('name');
@@ -37,7 +37,7 @@ class CreatePermissionTables extends Migration
         });
 
         Schema::create($tableNames['roles'], function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('name');
             $table->string('guard_name');
             $table->timestamps();
