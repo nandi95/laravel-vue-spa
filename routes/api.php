@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth:api', 'as' => 'api.dashboard.'], function ()
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::get('/user', [UserController::class, 'show'])->name('me');
+    Route::get("/movies/{movie}/watch", [\App\Http\Controllers\MovieController::class, 'watch']);
 
     Route::patch('settings/profile', [ProfileController::class, 'update'])->name('settings.profile.update');
     Route::patch('settings/password', [PasswordController::class, 'update'])->name('settings.password.update');

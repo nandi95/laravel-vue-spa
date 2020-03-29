@@ -87,7 +87,7 @@ Only the major notable changes.
  - Added light and dark theme + user defined main colors
 
 ***
-
+c
 **BACKEND**
 - Added LaravelEnum package and 2 general enum list
 - Added testing utilities

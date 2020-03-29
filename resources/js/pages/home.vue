@@ -9,12 +9,17 @@
     <!--      v-if="websocketWorks"-->
     <!--      >It worked!</span-->
     <!--    >-->
+    <VideoPlayer />
   </card>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import VideoPlayer from "../components/VideoPlayer";
 export default {
+  components: {
+    VideoPlayer
+  },
   middleware: "auth",
   metaInfo() {
     return { title: this.$t("home") };
