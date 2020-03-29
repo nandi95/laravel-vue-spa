@@ -3,8 +3,9 @@
 namespace {{ namespace }};
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use App\Models\BasePivot;
 
-class {{ class }} extends Pivot
+class {{ class }} extends BasePivot
 {
     //
 }
