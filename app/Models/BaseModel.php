@@ -15,7 +15,7 @@ class BaseModel extends Model
     use TimeZoneAware;
 
     /**
-     * Dates that should be adjusted to user's timezone
+     * Dates that should be adjusted to user's timezone.
      *
      * @var array
      */
