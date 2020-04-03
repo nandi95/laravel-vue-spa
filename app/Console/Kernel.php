@@ -20,7 +20,6 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         // Generators
-        \App\Console\Commands\Generators\Model::class,
         ImportCocktails::class
     ];
 

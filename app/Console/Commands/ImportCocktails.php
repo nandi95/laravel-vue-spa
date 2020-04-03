@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 
 use App\Imports\CocktailsImport;
 use App\Models\Cocktail;
+use App\Models\CocktailIngredient;
+use App\Models\Ingredient;
 use Illuminate\Console\Command;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -36,12 +38,14 @@ class ImportCocktails extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return void
      */
     public function handle()
     {
+        Ingredient::truncate();
+        Ingredient::unguard();
         Cocktail::truncate();
         Cocktail::unguard();
-        Excel::import(new CocktailsImport, public_path('Cocktails.xls'));
+        (new CocktailsImport)->withOutput($this->output)->import(public_path('Cocktails.xlsx'));
     }
 }

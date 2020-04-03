@@ -15,7 +15,10 @@ class CreateIngredientsTable extends Migration
     {
         Schema::create('ingredients', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->boolean('is_granish')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

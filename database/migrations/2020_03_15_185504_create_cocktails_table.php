@@ -21,8 +21,6 @@ class CreateCocktailsTable extends Migration
             $table->string('bar_or_company')->nullable();
             $table->string('location')->nullable();
             $table->enum('season', ['Summer', 'Fall', 'Autumn', 'Winter', 'Spring'])->nullable();
-            $table->string('ingredients')->nullable();
-            $table->string('garnish')->nullable();
             $table->string('glassware')->nullable();
             $table->text('preparation')->nullable();
             $table->text('notes')->nullable();
