@@ -6,8 +6,6 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
-use App\Http\Controllers\Controller;
-use Illuminate\Auth\Events\Verified;
 use Illuminate\Validation\ValidationException;
 
 /**

@@ -26,8 +26,7 @@ trait TimeZoneAware
             && isset($this->timezoneAwareDates)
             && in_array($key, $this->timezoneAwareDates)
         ) {
-            $timezone = (string) (auth()->user()->timezone ?? 'UTC');
-            $value->setTimezone($timezone);
+            $value->setTimezone(auth()->user()->timezone);
         }
 
         return $value;
@@ -36,7 +35,8 @@ trait TimeZoneAware
 
     /**
      * @param Carbon|string $dateTime
-     * @param User          $user
+     *
+     * @param User $user
      *
      * @return Carbon
      */
@@ -46,11 +46,8 @@ trait TimeZoneAware
             return $dateTime;
         }
         $dateTime = Carbon::parse($dateTime);
-        if ($user) {
-            $timezone = (string) ($user->settings->timezone ?? 'UTC');
-        } else {
-            $timezone = (string) (auth()->user()->settings->timezone ?? 'UTC');
-        }
+        $user     = $user ?? auth()->user();
+        $timezone = (string)($user->timezone ?? config('app.timezone'));
 
         $dateTime->setTimezone($timezone);
         return $dateTime;

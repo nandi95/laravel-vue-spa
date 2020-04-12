@@ -13,7 +13,7 @@
 
 ## Features
 
-- Laravel 6.0
+- Laravel 7
 - Vue + VueRouter + Vuex + VueI18n + ESlint
 - Pages with dynamic import and custom layouts
 - Login, register, email verification and password reset
@@ -101,5 +101,4 @@ Only the major notable changes.
 - Added base model
 - Added spatie permissions
 - Added websockets
-- Upgraded to 7.x
 

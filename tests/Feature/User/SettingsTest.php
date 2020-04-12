@@ -59,7 +59,6 @@ class SettingsTest extends TestCase
      */
     public function update_password()
     {
-//        $this->withoutExceptionHandling();
         // Act
         $response = $this->patchJson('/api/settings/password', [
             'old_password'              => 'password',

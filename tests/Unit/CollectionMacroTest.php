@@ -3,9 +3,8 @@
 namespace Tests\Unit;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
@@ -57,21 +56,24 @@ class CollectionMacroTest extends TestCase
      * @test
      *
      * @return void
+     *
+     * @throws Exception
      */
     public function if_ids_given_only_specified_models_are_deleted()
     {
+        $this->withoutExceptionHandling();
         // Arrange
         $users = factory(User::class, 3)->create();
 
         // Assert
-        $this->assertCount(2, $users->delete(1));
+        $this->assertCount(2, $users->delete($users->first()->getKey()));
 
         // Arrange
-        User::truncate();
+        User::query()->delete();
         $users = factory(User::class, 3)->create();
 
         // Assert
-        $this->assertCount(1, $users->delete([1,2]));
+        $this->assertCount(1, $users->delete($users->pluck('id')->take(2)));
     }
 
     /**
@@ -106,11 +108,11 @@ class CollectionMacroTest extends TestCase
         $this->assertCount(2, $users->forceDelete(1));
 
         // Arrange
-        User::truncate();
+        User::query()->delete();
         $users = factory(User::class, 3)->create();
 
         // Assert
-        $this->assertCount(1, $users->forceDelete([1,2]));
+        $this->assertCount(1, $users->forceDelete($users->pluck('id')->take(2)->toArray()));
     }
 
 

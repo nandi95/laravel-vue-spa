@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Notifications\VerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 /**
@@ -20,7 +20,9 @@ class RegisterTest extends TestCase
      */
     public function can_register()
     {
-        $this->disableExceptionHandling();
+        // Arrange
+        Notification::fake();
+
         // Act
         $response = $this->postJson(route('api.guest.auth.register'), factory(User::class)->state("toRegister")->make()->getAttributes());
 
@@ -44,5 +46,21 @@ class RegisterTest extends TestCase
         // Assert
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['email']);
+    }
+
+
+    /**
+     * @test
+     */
+    public function verify_email_sent_on_register()
+    {
+        // Arrange
+        Notification::fake();
+
+        // Act
+        $response = $this->postJson(route('api.guest.auth.register'), factory(User::class)->state("toRegister")->make()->getAttributes());
+
+        // Assert
+        Notification::assertSentTo(User::first(), VerifyEmail::class);
     }
 }
