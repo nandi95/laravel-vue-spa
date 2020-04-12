@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
@@ -60,7 +62,10 @@ class VerificationController extends Controller
      * Resend the email verification notification.
      *
      * @param Request $request
+     *
      * @return JsonResponse
+     *
+     * @throws ValidationException
      */
     public function resend(Request $request)
     {

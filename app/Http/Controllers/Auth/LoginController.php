@@ -6,13 +6,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Exceptions\VerifyEmailException;
-use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 
 /**
  * Class LoginController
@@ -84,9 +80,10 @@ class LoginController extends Controller
      *
      * @param Request $request
      *
-     * @return JsonResponse
+     * @return void
      *
      * @throws ValidationException
+     * @throws VerifyEmailException
      */
     protected function sendFailedLoginResponse(Request $request)
     {

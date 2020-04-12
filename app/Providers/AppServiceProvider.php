@@ -5,15 +5,16 @@ namespace App\Providers;
 use App\Models\User;
 use App\Observers\UserObserver;
 use Illuminate\Database\DatabaseManager;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\SQLiteConnection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use InvalidArgumentException;
 use Laravel\Dusk\DuskServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
-use Laravel\Dusk\DuskServiceProvider;
 
 /**
  * Class AppServiceProvider
@@ -24,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
+     *
+     * @param DatabaseManager $db
      *
      * @return void
      */
@@ -76,7 +79,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function setUpCollectionMacros()
     {
-        Collection::macro('update', function (array $attributes) {
+        EloquentCollection::macro('update', function (array $attributes) {
             return $this->map(function ($model) use ($attributes) {
                 if (is_subclass_of($model, Model::class)) {
                     $model->update($attributes);
@@ -86,7 +89,10 @@ class AppServiceProvider extends ServiceProvider
 
         // Delete all items or just the given ids.
         // Return remainders
-        Collection::macro('delete', function ($ids = []) {
+        EloquentCollection::macro('delete', function ($ids = []) {
+            if ($ids instanceof Collection) {
+                $ids = $ids->toArray();
+            }
             $ids = Arr::wrap($ids);
             return $this->filter(function ($model) use ($ids) {
                 if (is_subclass_of($model, Model::class)) {
@@ -107,7 +113,10 @@ class AppServiceProvider extends ServiceProvider
 
         // Delete all items or just the given ids.
         // Return remainders
-        Collection::macro('forceDelete', function ($ids = []) {
+        EloquentCollection::macro('forceDelete', function ($ids = []) {
+            if ($ids instanceof Collection) {
+                $ids = $ids->toArray();
+            }
             $ids = Arr::wrap($ids);
             return $this->filter(function ($model) use ($ids) {
                 if (is_subclass_of($model, Model::class)) {
@@ -153,10 +162,10 @@ class AppServiceProvider extends ServiceProvider
                 Arr::pull($notification, 'type');
                 $status = array_merge($status, $notification);
             } else {
-                throw new \InvalidArgumentException('Unexpected value given.');
+                throw new InvalidArgumentException('Unexpected value given.');
             }
 
-            $this->with('notification', $notification);
+            $this->with('notification', $status);
 
             return $this;
         });
@@ -175,7 +184,7 @@ class AppServiceProvider extends ServiceProvider
                     Arr::pull($notification, 'type');
                     $status = array_merge($status, $notification);
                 } else {
-                    throw new \InvalidArgumentException('Unexpected value given.');
+                    throw new InvalidArgumentException('Unexpected value given.');
                 }
 
                 $this->with('notification', $status);

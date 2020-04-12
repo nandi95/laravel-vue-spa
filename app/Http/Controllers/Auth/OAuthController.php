@@ -10,7 +10,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Laravel\Socialite\Facades\Socialite;
 
 /**
  * Class OAuthController
