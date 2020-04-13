@@ -1,12 +1,18 @@
 <template>
-  <button v-if="githubAuth" class="btn btn-secondary" type="button" @click="login">
+  <button
+    v-if="githubAuth"
+    class="btn btn-secondary"
+    type="button"
+    @click="login"
+  >
     {{ $t("login_with") }}
     <GithubIcon :size="68" />
   </button>
 </template>
 
 <script>
-import GithubIcon from "icons/GithubCircle.vue";
+import GithubIcon from "icons/Github.vue";
+
 export default {
   name: "LoginWithGithub",
   components: {
@@ -26,11 +32,12 @@ export default {
     async login() {
       const newWindow = openWindow("", this.$t("login"));
 
-      const url = await this.$store.dispatch("auth/fetchOauthUrl", {
-        provider: "github"
-      });
-
-      newWindow.location.href = url;
+      newWindow.location.href = await this.$store.dispatch(
+        "auth/fetchOauthUrl",
+        {
+          provider: "github"
+        }
+      );
     },
     /**
      * @param {MessageEvent} e
@@ -50,6 +57,8 @@ export default {
 };
 
 /**
+ * @param url
+ * @param title
  * @param  {Object} options
  * @return {Window}
  */
