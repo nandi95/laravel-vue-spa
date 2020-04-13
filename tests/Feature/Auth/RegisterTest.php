@@ -58,7 +58,7 @@ class RegisterTest extends TestCase
         Notification::fake();
 
         // Act
-        $response = $this->postJson(route('api.guest.auth.register'), factory(User::class)->state("toRegister")->make()->getAttributes());
+        $this->postJson(route('api.guest.auth.register'), factory(User::class)->state("toRegister")->make()->getAttributes());
 
         // Assert
         Notification::assertSentTo(User::first(), VerifyEmail::class);

@@ -90,6 +90,12 @@ class AppServiceProvider extends ServiceProvider
         // Delete all items or just the given ids.
         // Return remainders
         EloquentCollection::macro('delete', function ($ids = []) {
+            if (is_subclass_of($ids, Model::class)) {
+                $ids = $ids->getKey();
+            }
+            if ($ids instanceof EloquentCollection) {
+                $ids = $ids->modelKeys();
+            }
             if ($ids instanceof Collection) {
                 $ids = $ids->toArray();
             }
@@ -114,6 +120,12 @@ class AppServiceProvider extends ServiceProvider
         // Delete all items or just the given ids.
         // Return remainders
         EloquentCollection::macro('forceDelete', function ($ids = []) {
+            if (is_subclass_of($ids, Model::class)) {
+                $ids = $ids->getKey();
+            }
+            if ($ids instanceof EloquentCollection) {
+                $ids = $ids->modelKeys();
+            }
             if ($ids instanceof Collection) {
                 $ids = $ids->toArray();
             }
