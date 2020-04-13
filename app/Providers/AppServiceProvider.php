@@ -7,6 +7,7 @@ use App\Observers\UserObserver;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Database\SQLiteConnection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
@@ -72,6 +73,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->setUpCollectionMacros();
         $this->setUpResponseMacros();
+        $this->setUpBuilderMacros();
     }
 
     /**
@@ -204,5 +206,16 @@ class AppServiceProvider extends ServiceProvider
                 return $this;
             });
         }
+    }
+
+    public function setUpBuilderMacros()
+    {
+        Builder::macro('whereLike', function($attributes, string $searchTerm) {
+            foreach(Arr::wrap($attributes) as $attribute) {
+                $this->orWhere($attribute, 'LIKE', "%{$searchTerm}%");
+            }
+
+            return $this;
+        });
     }
 }
