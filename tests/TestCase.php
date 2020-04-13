@@ -7,6 +7,8 @@ use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use ReflectionClass;
+use ReflectionException;
 use Tests\Traits\InteractsWithPermissions;
 
 /**
@@ -36,21 +38,6 @@ abstract class TestCase extends BaseTestCase
         return $uses;
     }
 
-    /**
-     * Disable Laravel's default exception handler and throw the exception.
-     *
-     * @return void
-     */
-    protected function disableExceptionHandling()
-    {
-        $this->app->instance(ExceptionHandler::class, new class extends Handler {
-            public function __construct() {}
-            public function report(\Throwable $e) {}
-            public function render($request, \Throwable $e) {
-                throw $e;
-            }
-        });
-    }
 
     /**
      * Call protected/private method of a class.
@@ -61,11 +48,11 @@ abstract class TestCase extends BaseTestCase
      *
      * @return mixed
      *
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function invokePrivateMethod(&$object, $methodName, array $parameters = [])
     {
-        $reflection = new \ReflectionClass(get_class($object));
+        $reflection = new ReflectionClass(get_class($object));
         $method     = $reflection->getMethod($methodName);
         $method->setAccessible(true);
 
@@ -82,11 +69,11 @@ abstract class TestCase extends BaseTestCase
      *
      * @return void
      *
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function setPrivateValue(&$object, string $propertyName, $value)
     {
-        $reflection = new \ReflectionClass(get_class($object));
+        $reflection = new ReflectionClass(get_class($object));
         $property   = $reflection->getProperty($propertyName);
 
         $property->setAccessible(true);
