@@ -12,7 +12,7 @@ class BuilderMacroTest extends TestCase
      *
      * @return void
      */
-    public function constarint_works_with_string_column_name()
+    public function whereLike_constraint_works_with_string_column_name()
     {
         // Arrange
         factory(User::class, 3)->create();
@@ -32,7 +32,7 @@ class BuilderMacroTest extends TestCase
      *
      * @return void
      */
-    public function constarint_works_with_array_of_column_names()
+    public function whereLike_constraint_works_with_array_of_column_names()
     {
         // Arrange
         factory(User::class, 3)->create();

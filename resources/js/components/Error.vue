@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  // todo functional
+// todo functional
 import AlertOctagonIcon from "icons/AlertOctagon";
 import CloseIcon from "icons/CloseCircle";
 import { HasError } from "vform";
