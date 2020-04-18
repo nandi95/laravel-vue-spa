@@ -23,6 +23,6 @@ class DevDataSeeder extends Seeder
             $permissionGroup->getTable() . '_id' => $permissionGroup->getKey(),
         ]);
         $role->givePermissionTo($permission);
-        User::whereEmail('development@' . env('APP_DOMAIN'))->first()->assignRole($role);
+        User::whereEmail('development@' . parse_url(config('app.url'))['host'])->first()->assignRole($role);
     }
 }

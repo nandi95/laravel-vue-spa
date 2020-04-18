@@ -18,7 +18,7 @@ class UserTableSeeder extends Seeder
     {
         factory(User::class)->create([
             'password' => Hash::make('password'),
-            'email' => 'development@' . env('APP_DOMAIN')
+            'email' => 'development@' . parse_url(config('app.url'))['host']
         ]);
     }
 }
