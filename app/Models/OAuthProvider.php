@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class OAuthProvider
  *
  * @package App\Models
  */
-class OAuthProvider extends BaseModel
+class OAuthProvider extends Model
 {
     /**
      * The table associated with the model.
@@ -35,7 +36,7 @@ class OAuthProvider extends BaseModel
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function user()
     {

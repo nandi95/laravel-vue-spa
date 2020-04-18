@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Schema;
  */
 trait CanSearch
 {
-
     /**
      * @param Builder $query
      * @param string  $keyword

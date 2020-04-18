@@ -5,36 +5,21 @@ namespace App\Models;
 use App\Models\Authorisation\Permission;
 use App\Notifications\VerifyEmail;
 use App\Notifications\ResetPassword;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\Access\Authorizable;
 use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * Class User
  *
  * @package App\Models
  */
-class User extends BaseModel implements
-    JWTSubject,
-    MustVerifyEmail,
-    AuthenticatableContract,
-    AuthorizableContract,
-    CanResetPasswordContract
+class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 {
-    use Notifiable,
-        SoftDeletes,
-        HasRoles,
-        \Illuminate\Auth\Authenticatable,
-        Authorizable,
-        CanResetPassword,
-        \Illuminate\Auth\MustVerifyEmail;
+    use Notifiable, SoftDeletes, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -75,7 +60,7 @@ class User extends BaseModel implements
      */
     public function getPhotoUrlAttribute()
     {
-        return $this->attributes['photo_url'] ?? 'https://www.gravatar.com/avatar/'.md5(strtolower($this->email)).'.jpg?s=200&d=mm';
+        return $this->attributes['photo_url'] ?? 'https://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '.jpg?s=200&d=mm';
     }
 
     /**

@@ -35,8 +35,7 @@ trait TimeZoneAware
 
     /**
      * @param Carbon|string $dateTime
-     *
-     * @param User $user
+     * @param User          $user
      *
      * @return Carbon
      */
