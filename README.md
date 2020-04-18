@@ -1,14 +1,10 @@
 # Laravel-Vue SPA 
 
-<a href="https://travis-ci.org/cretueusebiu/laravel-vue-spa"><img src="https://travis-ci.org/cretueusebiu/laravel-vue-spa.svg?branch=master" alt="Build Status"></a>
-<a href="https://packagist.org/packages/cretueusebiu/laravel-vue-spa"><img src="https://poser.pugx.org/cretueusebiu/laravel-vue-spa/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/cretueusebiu/laravel-vue-spa"><img src="https://poser.pugx.org/cretueusebiu/laravel-vue-spa/v/stable.svg" alt="Latest Stable Version"></a>
-
 ## Fork differences can be found at the bottom of the document
 > A Laravel-Vue SPA starter project template.
 
 <p align="center">
-<img src="https://i.imgur.com/NHFTsGt.png">
+<img src="https://i.imgur.com/Z2vXovm.png">
 </p>
 
 ## Features
@@ -81,7 +77,7 @@ Only the major notable changes.
  - Updated error component
  - Added tailwindcss
  - Added material design icons
- - Added vue toastify
+ - Added vue-toastify
  - Updated styling throughout
  - Implemented frontend roles/permissions
  - Added light and dark theme + user defined main colors
@@ -98,7 +94,6 @@ Only the major notable changes.
 - Updated User model to include first and last name
 - Moved models into Models/ directory
 - Added StrongPassword rule
-- Added base model
 - Added spatie permissions
 - Added websockets
 
