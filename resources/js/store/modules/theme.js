@@ -1,5 +1,5 @@
 import * as types from "../mutation-types";
-import {isNull, setDarkTheme} from "../../utilities/utils";
+import { isNull, setDarkTheme } from "../../utilities/utils";
 
 // state
 export const state = {
@@ -32,7 +32,7 @@ export const getters = {
         window.matchMedia("(prefers-color-scheme: dark)").matches
       );
     }
-    return state.darkMode == "true";
+    return state.darkMode === "true";
   }
 };
 
